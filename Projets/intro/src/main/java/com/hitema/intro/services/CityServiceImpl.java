@@ -39,4 +39,11 @@ public class CityServiceImpl implements CityService {
     public List<City> readAll() {
         return repository.findAll();
     }
+
+    @Override
+    public List<City> readByName(String name) {
+        return repository.findByNameContaining(name);
+    }
+
+
 }

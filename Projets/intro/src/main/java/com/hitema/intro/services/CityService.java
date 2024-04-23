@@ -10,4 +10,5 @@ public interface CityService {
     City update(City city);
     boolean delete(Long id);
     List<City> readAll();
+    List<City> readByName(String name);
 }

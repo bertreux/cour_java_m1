@@ -22,7 +22,7 @@ public class CityController {
         this.service = service;
     }
 
-    @GetMapping({"/all", ""})
+    @GetMapping({"/all", "", "/name/"})
     public List<City> readAll() {
         return service.readAll();
     }
@@ -30,5 +30,10 @@ public class CityController {
     @GetMapping("/{id}")
     public City getOne(@PathVariable Long id) {
         return service.read(id);
+    }
+
+    @GetMapping("/name/{name}")
+    public List<City> getOne(@PathVariable String name) {
+        return service.readByName(name);
     }
 }

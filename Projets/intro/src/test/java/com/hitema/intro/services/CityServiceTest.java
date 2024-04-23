@@ -43,4 +43,11 @@ class CityServiceTest {
         service.readAll().forEach(c -> log.info(c.toString()));
         log.info("FIN TEST Read All");
     }
+    @Test
+    void readByName() {
+        log.info("DEBUT TEST Read All By Name");
+        service.readByName("A").forEach(c -> log.info(c.toString()));
+        log.info("FIN TEST Read All By Name");
+    }
+    
 }
