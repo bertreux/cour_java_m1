@@ -1,6 +1,7 @@
 package com.hitema.intro.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public class City {
 
     @ManyToOne()
     @JoinColumn(name="country_id")
+    @JsonIgnoreProperties(value = { "cities" })
     private Country country;
 
     @Column(name = "last_update")

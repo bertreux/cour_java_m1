@@ -23,7 +23,7 @@ public class Country {
 
     @OneToMany(mappedBy="country")
     @JsonIgnoreProperties(value = {"country"})
-    private List<City> city;
+    private List<City> cities;
 
     @Override
     public String toString() {
@@ -31,6 +31,7 @@ public class Country {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastUpdate=" + lastUpdate +
+                ", cities=" + cities +
                 '}';
     }
 
@@ -58,11 +59,11 @@ public class Country {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<City> getCity() {
-        return city;
+    public List<City> getCities() {
+        return cities;
     }
 
-    public void setCity(List<City> city) {
-        this.city = city;
+    public void setCities(List<City> city) {
+        this.cities = city;
     }
 }
