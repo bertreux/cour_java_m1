@@ -3,6 +3,7 @@ package com.hitema.intro.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "country")
@@ -17,6 +18,9 @@ public class Country {
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    @OneToMany(mappedBy="countryId")
+    private List<City> city;
 
     @Override
     public String toString() {
@@ -49,5 +53,13 @@ public class Country {
 
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public List<City> getCity() {
+        return city;
+    }
+
+    public void setCity(List<City> city) {
+        this.city = city;
     }
 }

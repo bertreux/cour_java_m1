@@ -20,24 +20,42 @@ class CityServiceTest {
     @Autowired
     CityService service;
 
+    @Autowired
+    CountryService countryService;
+
     @Test
     void create() {
         log.info("DEBUT TEST Create");
         City city = new City();
-        city.setName("test");
-        city.setLastUpdate(LocalDateTime.now());
-        city.setCountryId(1L);
-        city = service.create(city);
-        if (city != null) {
-            log.info(city.toString());
-            boolean delete = service.delete(city.getId());
-            if (delete){
-                log.info("Le test a bien été crée et supprimer");
+        Country country = new Country();
+        country.setLastUpdate(LocalDateTime.now());
+        country.setName("test");
+        country = countryService.create(country);
+        if (country != null) {
+            log.info(country.toString());
+            city.setName("test");
+            city.setLastUpdate(LocalDateTime.now());
+            city.setCountryId(country);
+            city = service.create(city);
+            if (city != null) {
+                log.info(city.toString());
+                boolean delete = service.delete(city.getId());
+                if (delete){
+                    log.info("Le test du city a bien été crée et supprimer");
+                }else {
+                    log.error("Le test du city a bien été crée mais n'a pas pu etre supprimé");
+                }
             }else {
-                log.error("Le test du city a bien été crée mais n'a pas pu etre supprimé");
+                log.error("Le test du city n'a pas été crée");
             }
-        }else {
-            log.error("Le test du city n'a pas été crée");
+            boolean delete = countryService.delete(country.getId());
+            if (delete){
+                log.info("Le test du country a bien été crée et supprimer");
+            }else {
+                log.error("Le test du country a bien été crée mais n'a pas pu etre supprimé");
+            }
+        } else {
+            log.error("Le country de test n'a pas pu etre crée");
         }
         log.info("FIN TEST Create");
     }
