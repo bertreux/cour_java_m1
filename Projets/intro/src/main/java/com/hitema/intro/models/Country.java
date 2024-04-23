@@ -1,5 +1,6 @@
 package com.hitema.intro.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class Country {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    @JsonManagedReference
     @OneToMany(mappedBy="countryId")
     private List<City> city;
 
