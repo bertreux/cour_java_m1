@@ -17,9 +17,8 @@ public class City {
     private String name;
 
     @ManyToOne()
-    @JsonBackReference
     @JoinColumn(name="country_id")
-    private Country countryId;
+    private Country country;
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
@@ -29,7 +28,7 @@ public class City {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", countryId=" + countryId +
+                ", country=" + country +
                 ", lastUpdate=" + lastUpdate +
                 '}';
     }
@@ -50,12 +49,12 @@ public class City {
         this.name = name;
     }
 
-    public Country getCountryId() {
-        return countryId;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountryId(Country countryId) {
-        this.countryId = countryId;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public LocalDateTime getLastUpdate() {

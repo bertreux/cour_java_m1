@@ -35,7 +35,7 @@ class CityServiceTest {
             log.info(country.toString());
             city.setName("test");
             city.setLastUpdate(LocalDateTime.now());
-            city.setCountryId(country);
+            city.setCountry(country);
             city = service.create(city);
             if (city != null) {
                 log.info(city.toString());

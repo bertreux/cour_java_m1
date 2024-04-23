@@ -1,5 +1,6 @@
 package com.hitema.intro.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -20,8 +21,8 @@ public class Country {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy="countryId")
+    @OneToMany(mappedBy="country")
+    @JsonIgnoreProperties(value = {"country"})
     private List<City> city;
 
     @Override
