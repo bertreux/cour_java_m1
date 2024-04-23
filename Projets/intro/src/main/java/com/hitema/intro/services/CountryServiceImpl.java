@@ -4,6 +4,7 @@ import com.hitema.intro.models.Country;
 import com.hitema.intro.repositories.CountryRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +18,9 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country create(Country country) {
+        if (country.getLastUpdate() == null) {
+            country.setLastUpdate(LocalDateTime.now());
+        }
         return repository.save(country);
     }
 

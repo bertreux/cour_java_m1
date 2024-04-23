@@ -4,6 +4,7 @@ import com.hitema.intro.models.City;
 import com.hitema.intro.repositories.CityRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,6 +17,9 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City create(City city) {
+        if (city.getLastUpdate() == null) {
+            city.setLastUpdate(LocalDateTime.now());
+        }
         return repository.save(city);
     }
 

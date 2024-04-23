@@ -1,10 +1,14 @@
 package com.hitema.intro.services;
 
+import com.hitema.intro.models.City;
+import com.hitema.intro.models.Country;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +22,24 @@ class CityServiceTest {
 
     @Test
     void create() {
+        log.info("DEBUT TEST Create");
+        City city = new City();
+        city.setName("test");
+        city.setLastUpdate(LocalDateTime.now());
+        city.setCountryId(1L);
+        city = service.create(city);
+        if (city != null) {
+            log.info(city.toString());
+            boolean delete = service.delete(city.getId());
+            if (delete){
+                log.info("Le test a bien été crée et supprimer");
+            }else {
+                log.error("Le test du city a bien été crée mais n'a pas pu etre supprimé");
+            }
+        }else {
+            log.error("Le test du city n'a pas été crée");
+        }
+        log.info("FIN TEST Create");
     }
 
     @Test

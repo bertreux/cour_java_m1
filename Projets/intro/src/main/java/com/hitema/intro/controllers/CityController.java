@@ -1,13 +1,11 @@
 package com.hitema.intro.controllers;
 
 import com.hitema.intro.models.City;
+import com.hitema.intro.models.Country;
 import com.hitema.intro.services.CityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,10 @@ public class CityController {
     @GetMapping("/name/{name}")
     public List<City> getOne(@PathVariable String name) {
         return service.readByName(name);
+    }
+
+    @PostMapping("/create")
+    public City create(@RequestBody City city) {
+        return service.create(city);
     }
 }

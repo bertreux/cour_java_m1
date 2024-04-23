@@ -4,10 +4,7 @@ import com.hitema.intro.models.Country;
 import com.hitema.intro.services.CountryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,5 +29,10 @@ public class CountryController {
     @GetMapping("/{id}")
     public Country getOne(@PathVariable Long id) {
         return service.read(id);
+    }
+
+    @PostMapping("/create")
+    public Country create(@RequestBody Country country) {
+        return service.create(country);
     }
 }
