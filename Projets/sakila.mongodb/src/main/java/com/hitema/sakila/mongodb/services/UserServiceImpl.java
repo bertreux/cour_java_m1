@@ -46,6 +46,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> readAllNomOrPrenom(String name) {
-        return repository.rechercherParNomOuPrenom(name);
+        return repository.findByFirstNameContainingOrLastNameContaining(name, name);
     }
 }
