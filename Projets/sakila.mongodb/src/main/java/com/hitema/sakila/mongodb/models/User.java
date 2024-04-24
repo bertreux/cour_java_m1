@@ -11,10 +11,10 @@ public class User {
     @Id
     private String email;
 
-    @Field(name = "Prénom")
+    @Field(name = "first_name")
     private String firstName;
 
-    @Field(name = "NOM")
+    @Field(name = "last_name")
     private String lastName;
 
     @Field(name = "last_update")
