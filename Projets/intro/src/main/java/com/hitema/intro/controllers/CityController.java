@@ -35,6 +35,11 @@ public class CityController {
         return service.readByName(name);
     }
 
+    @GetMapping("/capitals")
+    public List<City> getAllCapitals() {
+        return service.readAllCapital();
+    }
+
     @PostMapping("/create")
     public City create(@RequestBody City city) {
         return service.create(city);

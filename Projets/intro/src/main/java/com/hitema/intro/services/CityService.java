@@ -11,4 +11,5 @@ public interface CityService {
     boolean delete(Long id);
     List<City> readAll();
     List<City> readByName(String name);
+    List<City> readAllCapital();
 }

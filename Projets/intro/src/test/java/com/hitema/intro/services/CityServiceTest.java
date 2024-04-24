@@ -80,7 +80,7 @@ class CityServiceTest {
     @Test
     void readAll() {
         log.info("DEBUT TEST Read All");
-        service.readAll().forEach(c -> log.info(c.toString()));
+        service.readAll().forEach(c -> log.info("{}", c));
         log.info("FIN TEST Read All");
     }
     @Test
@@ -88,6 +88,13 @@ class CityServiceTest {
         log.info("DEBUT TEST Read All By Name");
         service.readByName("A").forEach(c -> log.info(c.toString()));
         log.info("FIN TEST Read All By Name");
+    }
+
+    @Test
+    void readAllCapital() {
+        log.info("DEBUT TEST Read All By Capital Is True");
+        service.readAllCapital().forEach(c -> log.info("{}", c));
+        log.info("FIN TEST Read All By Capital Is True");
     }
     
 }

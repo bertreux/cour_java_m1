@@ -25,13 +25,17 @@ public class City {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    @Column(name = "capital", nullable = true)
+    private Boolean capital;
+
     @Override
     public String toString() {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", country=" + country +
+                ", country=" + country.toString() +
                 ", lastUpdate=" + lastUpdate +
+                ", capital=" + capital +
                 '}';
     }
 
@@ -65,5 +69,13 @@ public class City {
 
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public boolean isCapital() {
+        return capital;
+    }
+
+    public void setCapital(Boolean capital) {
+        this.capital = capital;
     }
 }
