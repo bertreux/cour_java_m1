@@ -32,6 +32,8 @@ class UserServiceTest {
         serchUser = service.read(user.getEmail());
         if (serchUser == null) {
             log.error("erreur lors de la creation du user");
+        } else {
+            log.info(serchUser.toString());
         }
         log.info("FIN TEST Read All");
     }
