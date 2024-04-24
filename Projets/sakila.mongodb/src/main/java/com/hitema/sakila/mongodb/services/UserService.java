@@ -10,4 +10,5 @@ public interface UserService {
     User update(User user);
     boolean delete(String id);
     List<User> readAll();
+    List<User> readAllNomOrPrenom(String name);
 }

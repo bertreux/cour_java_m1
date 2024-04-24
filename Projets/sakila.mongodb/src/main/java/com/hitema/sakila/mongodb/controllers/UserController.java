@@ -19,6 +19,16 @@ public class UserController {
         this.service = service;
     }
 
+    @GetMapping("/{id}")
+    public User getOne(@PathVariable String id) {
+        return service.read(id);
+    }
+
+    @GetMapping("/name/{expr}")
+    public List<User> getAllUserWithName(@PathVariable String expr) {
+        return service.readAllNomOrPrenom(expr);
+    }
+
     @GetMapping({"/all", ""})
     public List<User> readAll() {
         return service.readAll();

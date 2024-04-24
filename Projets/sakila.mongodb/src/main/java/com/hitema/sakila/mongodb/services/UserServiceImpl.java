@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
     public List<User> readAll() {
         return repository.findAll();
     }
+
+    @Override
+    public List<User> readAllNomOrPrenom(String name) {
+        return repository.rechercherParNomOuPrenom(name);
+    }
 }
