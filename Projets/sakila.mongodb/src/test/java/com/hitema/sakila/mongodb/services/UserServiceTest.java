@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -40,6 +42,9 @@ class UserServiceTest {
 
     @Test
     void read() {
+        log.info("DEBUT TEST Read By id with john@doe.com");
+        log.info("{}", service.read("john@doe.com"));
+        log.info("FIN TEST Read By id with john@doe.com");
     }
 
     @Test
@@ -55,5 +60,12 @@ class UserServiceTest {
         log.info("DEBUT TEST Read All");
         service.readAll().forEach(c -> log.info("{}", c));
         log.info("FIN TEST Read All");
+    }
+
+    @Test
+    void readAllNomOrPrenom() {
+        log.info("DEBUT TEST Read All With Nom Or Prenom Containing st");
+        service.readAllNomOrPrenom("st").forEach(c -> log.info("{}", c));
+        log.info("FIN TEST Read All With Nom Or Prenom Containing st");
     }
 }
