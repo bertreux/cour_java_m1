@@ -1,5 +1,5 @@
 ::
-:: Script Arret/Relance conteneur MySQL 8.3.0
+:: Script Arret/Relance conteneur MariaDB
 ::
 @echo OFF
 set OPTION=%1
