@@ -31,7 +31,6 @@ public class Country {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastUpdate=" + lastUpdate +
-                ", cities=" + cities.toString() +
                 '}';
     }
 
