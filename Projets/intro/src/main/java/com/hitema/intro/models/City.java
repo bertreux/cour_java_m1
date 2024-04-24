@@ -33,7 +33,7 @@ public class City {
         return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", country=" + country.toString() +
+                ", country=" + country.toStringWithoutCities() +
                 ", lastUpdate=" + lastUpdate +
                 ", capital=" + capital +
                 '}';

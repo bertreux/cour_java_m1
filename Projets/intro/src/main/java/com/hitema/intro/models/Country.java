@@ -31,6 +31,15 @@ public class Country {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", lastUpdate=" + lastUpdate +
+                ", cities=" + cities +
+                '}';
+    }
+
+    public String toStringWithoutCities() {
+        return "Country{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastUpdate=" + lastUpdate +
                 '}';
     }
 
