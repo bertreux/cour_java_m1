@@ -26,6 +26,16 @@ public class CityController {
         this.serviceMysql = serviceMysql;
     }
 
+    @GetMapping("/mysql/all")
+    public List<CityMysql> getAllMysql() {
+        return serviceMysql.readAll();
+    }
+
+    @GetMapping("/mongo/all")
+    public List<CityMongo> getAllMongo() {
+        return serviceMongo.readAll();
+    }
+
     @GetMapping("/migrate")
     public List<CityMongo> migrate() {
         List<CityMysql> citiesMysql = serviceMysql.readAll();
