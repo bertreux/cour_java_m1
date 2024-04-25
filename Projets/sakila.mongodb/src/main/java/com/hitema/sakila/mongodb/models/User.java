@@ -1,9 +1,11 @@
 package com.hitema.sakila.mongodb.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.*;
 import java.time.LocalDateTime;
 
 @Document("user")
@@ -19,6 +21,10 @@ public class User {
 
     @Field(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    @Field(name = "picture")
+    @JsonIgnore
+    private byte[] picture;
 
     @Override
     public String toString() {
@@ -60,5 +66,13 @@ public class User {
 
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 }
