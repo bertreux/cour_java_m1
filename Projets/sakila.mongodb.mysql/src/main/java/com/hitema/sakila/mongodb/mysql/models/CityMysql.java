@@ -71,7 +71,7 @@ public class CityMysql {
     }
 
     public boolean isCapital() {
-        return capital;
+        return capital != null && capital;
     }
 
     public void setCapital(Boolean capital) {

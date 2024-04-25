@@ -67,7 +67,7 @@ public class CityMongo {
     }
 
     public Boolean getCapital() {
-        return capital;
+        return capital != null && capital;
     }
 
     public void setCapital(Boolean capital) {
