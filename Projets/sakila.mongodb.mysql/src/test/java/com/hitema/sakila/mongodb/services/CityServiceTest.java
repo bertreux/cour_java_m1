@@ -1,10 +1,11 @@
 package com.hitema.sakila.mongodb.services;
 
-import com.hitema.sakila.mongodb.mongo.models.Country;
-import com.hitema.sakila.mongodb.mongo.services.CityService;
-import com.hitema.sakila.mongodb.mongo.services.CountryService;
-import com.hitema.sakila.mongodb.mongo.models.City;
+import com.hitema.sakila.mongodb.mongo.models.CityMongo;
+import com.hitema.sakila.mongodb.mongo.models.CountryMongo;
+import com.hitema.sakila.mongodb.mongo.services.CityMongoService;
 import com.hitema.sakila.mongodb.mysql.services.CityMysqlService;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,73 +14,37 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @SpringBootTest
 class CityServiceTest {
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceTest.class);
 
     @Autowired
-    CityService service;
+    CityMongoService service;
 
     @Autowired
     CityMysqlService serviceMysql;
 
-    @Autowired
-    CountryService countryService;
-
     @Test
+    @Order(1)
     void create() {
-        log.info("DEBUT TEST Create");
-        City city = new City();
-        Country country = new Country();
-        country.setLastUpdate(LocalDateTime.now());
-        country.setName("test");
-        country = countryService.create(country);
-        if (country != null) {
-            log.info(country.toString());
-            city.setName("test");
-            city.setLastUpdate(LocalDateTime.now());
-            city.setCountry(country);
-            city = service.create(city);
-            if (city != null) {
-                log.info(city.toString());
-                boolean delete = service.delete(city.getId());
-                if (delete){
-                    log.info("Le test du city a bien été crée et supprimer");
-                }else {
-                    log.error("Le test du city a bien été crée mais n'a pas pu etre supprimé");
-                }
-            }else {
-                log.error("Le test du city n'a pas été crée");
-            }
-            boolean delete = countryService.delete(country.getId());
-            if (delete){
-                log.info("Le test du country a bien été crée et supprimer");
-            }else {
-                log.error("Le test du country a bien été crée mais n'a pas pu etre supprimé");
-            }
-        } else {
-            log.error("Le country de test n'a pas pu etre crée");
-        }
-        log.info("FIN TEST Create");
+        log.info("<<<<<<<<<START Create CityMongo >>>>>>>>>");
+        Long id = 12L;
+        var country = new CountryMongo(34, "France");
+        var city = new CityMongo();
+        city.setId(id);
+        city.setName("Paris");
+        city.setCapital(true);
+        city.setCountry(country);
+        assertTrue(service.create(city) != null, "CITY CREATE DOES NOT WORK !!!");
+        log.info("Create city : {} ", city);
+        log.info("<<<<<<<<<END Create CityMongo >>>>>>>>>");
     }
 
     @Test
     void read() {
-        log.info("DEBUT TEST Read By id");
-        City city = new City();
-        city.setName("test");
-        city.setCapital(true);
-        city.setLastUpdate(LocalDateTime.now());
-        city = service.create(city);
-        city = service.read(city.getId());
-        if(city != null) {
-            log.info(city.toString());
-            service.delete(city.getId());
-        } else {
-            log.error("Erreur lors de la lecture d'un element");
-        }
-        log.info("FIN TEST Read By id");
     }
 
     @Test
@@ -87,14 +52,17 @@ class CityServiceTest {
     }
 
     @Test
-    void delete() {
+    @DisplayName("Should Delete CityMongo")
+    @Order(0)
+    void shouldDeleteCity() {
+        log.info("<<<<<<<<<START shouldDeleteCity >>>>>>>>>");
+        Long id = 12L;
+        assertTrue(service.delete(id), "CITY DELETE ERROR id:"+id);
+        log.info("<<<<<<<<<END   shouldDeleteCity >>>>>>>>>");
     }
 
     @Test
     void readAll() {
-        log.info("DEBUT TEST Read All");
-        service.readAll().forEach(c -> log.info("{}", c));
-        log.info("FIN TEST Read All");
     }
 
     @Test

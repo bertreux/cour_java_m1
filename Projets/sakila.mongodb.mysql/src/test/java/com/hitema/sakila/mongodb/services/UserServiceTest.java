@@ -1,7 +1,7 @@
 package com.hitema.sakila.mongodb.services;
 
-import com.hitema.sakila.mongodb.mongo.models.User;
-import com.hitema.sakila.mongodb.mongo.services.UserService;
+import com.hitema.sakila.mongodb.mongo.models.UserMongo;
+import com.hitema.sakila.mongodb.mongo.services.UserMongoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,16 +14,16 @@ class UserServiceTest {
     private static final Logger log = LoggerFactory.getLogger(UserServiceTest.class);
 
     @Autowired
-    UserService service;
+    UserMongoService service;
 
     @Test
     void create() {
         log.info("DEBUT TEST Create");
-        User user = new User();
+        UserMongo user = new UserMongo();
         user.setFirstName("John");
         user.setLastName("Doe");
         user.setEmail("john@doe.com");
-        User serchUser = service.read(user.getEmail());
+        UserMongo serchUser = service.read(user.getEmail());
         if (serchUser != null) {
             service.delete(user.getEmail());
         }

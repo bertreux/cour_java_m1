@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.LocalDateTime;
 
 @Document("user")
-public class User {
+public class UserMongo {
     @Id
     private String email;
 

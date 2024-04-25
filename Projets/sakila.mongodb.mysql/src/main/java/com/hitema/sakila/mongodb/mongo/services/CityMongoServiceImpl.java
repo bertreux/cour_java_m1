@@ -1,23 +1,23 @@
 package com.hitema.sakila.mongodb.mongo.services;
 
-import com.hitema.sakila.mongodb.mongo.models.City;
-import com.hitema.sakila.mongodb.mongo.repositories.CityRepository;
+import com.hitema.sakila.mongodb.mongo.models.CityMongo;
+import com.hitema.sakila.mongodb.mongo.repositories.CityMongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CityServiceImpl implements CityService {
+public class CityMongoServiceImpl implements CityMongoService {
 
-    private CityRepository repository;
+    private CityMongoRepository repository;
 
-    public CityServiceImpl(CityRepository cityRepository) {
+    public CityMongoServiceImpl(CityMongoRepository cityRepository) {
         this.repository = cityRepository;
     }
 
     @Override
-    public City create(City city) {
+    public CityMongo create(CityMongo city) {
         if (city.getLastUpdate() == null) {
             city.setLastUpdate(LocalDateTime.now());
         }
@@ -25,23 +25,23 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public City read(String id) {
+    public CityMongo read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public City update(City city) {
+    public CityMongo update(CityMongo city) {
         return repository.save(city);
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Long id) {
         repository.deleteById(id);
         return ( read(id) == null );
     }
 
     @Override
-    public List<City> readAll() {
+    public List<CityMongo> readAll() {
         return repository.findAll();
     }
 }

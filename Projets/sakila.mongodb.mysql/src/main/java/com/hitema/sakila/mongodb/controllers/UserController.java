@@ -1,7 +1,7 @@
 package com.hitema.sakila.mongodb.controllers;
 
-import com.hitema.sakila.mongodb.mongo.models.User;
-import com.hitema.sakila.mongodb.mongo.services.UserService;
+import com.hitema.sakila.mongodb.mongo.models.UserMongo;
+import com.hitema.sakila.mongodb.mongo.services.UserMongoService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -14,34 +14,34 @@ import java.util.List;
 public class UserController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-    private UserService service;
+    private UserMongoService service;
 
-    public UserController(UserService service) {
+    public UserController(UserMongoService service) {
         this.service = service;
     }
 
     @GetMapping("/{id}")
-    public User getOne(@PathVariable String id) {
+    public UserMongo getOne(@PathVariable String id) {
         return service.read(id);
     }
 
     @GetMapping("/name/{expr}")
-    public List<User> getAllUserWithName(@PathVariable String expr) {
+    public List<UserMongo> getAllUserWithName(@PathVariable String expr) {
         return service.readAllNomOrPrenom(expr);
     }
 
     @GetMapping({"/all", ""})
-    public List<User> readAll() {
+    public List<UserMongo> readAll() {
         return service.readAll();
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody User user) {
+    public UserMongo create(@RequestBody UserMongo user) {
         return service.create(user);
     }
 
     @PostMapping("/picture/{id}")
-    public User insertPicture(@RequestBody byte[] file, @PathVariable String id) {
+    public UserMongo insertPicture(@RequestBody byte[] file, @PathVariable String id) {
         return service.setPictureById(id, file);
     }
 

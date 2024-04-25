@@ -1,22 +1,22 @@
 package com.hitema.sakila.mongodb.mongo.services;
 
-import com.hitema.sakila.mongodb.mongo.models.User;
-import com.hitema.sakila.mongodb.mongo.repositories.UserRepository;
+import com.hitema.sakila.mongodb.mongo.models.UserMongo;
+import com.hitema.sakila.mongodb.mongo.repositories.UserMongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
-    private UserRepository repository;
+public class UserMongoServiceImpl implements UserMongoService {
+    private UserMongoRepository repository;
 
-    public UserServiceImpl(UserRepository repository) {
+    public UserMongoServiceImpl(UserMongoRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public User create(User user) {
+    public UserMongo create(UserMongo user) {
         if (user.getLastUpdate() == null) {
             user.setLastUpdate(LocalDateTime.now());
         }
@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User read(String id) {
+    public UserMongo read(String id) {
         return repository.findById(id).orElse(null);
     }
 
     @Override
-    public User update(User user) {
+    public UserMongo update(UserMongo user) {
         return repository.save(user);
     }
 
@@ -40,25 +40,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> readAll() {
+    public List<UserMongo> readAll() {
         return repository.findAll();
     }
 
     @Override
-    public List<User> readAllNomOrPrenom(String name) {
+    public List<UserMongo> readAllNomOrPrenom(String name) {
         return repository.findByFirstNameContainingOrLastNameContaining(name, name);
     }
 
     @Override
-    public User setPictureById(String id, byte[] file) {
-        User user = read(id);
+    public UserMongo setPictureById(String id, byte[] file) {
+        UserMongo user = read(id);
         user.setPicture(file);
         return update(user);
     }
 
     @Override
     public byte[] getPicture(String id) {
-        User user = read(id);
+        UserMongo user = read(id);
         return user.getPicture();
     }
 }

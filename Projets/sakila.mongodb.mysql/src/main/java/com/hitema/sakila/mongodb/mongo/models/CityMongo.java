@@ -1,36 +1,44 @@
 package com.hitema.sakila.mongodb.mongo.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDateTime;
 
-@Document("country")
-public class Country {
+@Document("city")
+public class CityMongo {
     @Id
-    private String id;
+    private Long id;
 
-    @Field(name = "country")
+    @Field(name = "city")
     private String name;
+
+    private CountryMongo country;
 
     @Field(name = "last_update")
     private LocalDateTime lastUpdate;
 
+    @Field(name = "capital")
+    private Boolean capital;
+
     @Override
     public String toString() {
-        return "Country{" +
+        return "City{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
+                ", country=" + country +
                 ", lastUpdate=" + lastUpdate +
+                ", capital=" + capital +
                 '}';
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,11 +50,27 @@ public class Country {
         this.name = name;
     }
 
+    public CountryMongo getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryMongo country) {
+        this.country = country;
+    }
+
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public Boolean getCapital() {
+        return capital;
+    }
+
+    public void setCapital(Boolean capital) {
+        this.capital = capital;
     }
 }
