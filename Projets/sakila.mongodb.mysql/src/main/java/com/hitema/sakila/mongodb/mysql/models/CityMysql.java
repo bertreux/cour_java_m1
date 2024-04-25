@@ -1,44 +1,40 @@
-package com.hitema.intro.models;
+package com.hitema.sakila.mongodb.mysql.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "country")
-public class Country {
+@Table(name = "city")
+public class CityMysql {
     @Id
-    @Column(name = "country_id")
+    @Column(name = "city_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "country")
+    @Column(name = "city")
     private String name;
+
+    @ManyToOne()
+    @JoinColumn(name="country_id")
+    @JsonIgnoreProperties(value = { "cities" })
+    private CountryMysql country;
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
-    @OneToMany(mappedBy="country")
-    @JsonIgnoreProperties(value = {"country"})
-    private List<City> cities;
+    @Column(name = "capital", nullable = true)
+    private Boolean capital;
 
     @Override
     public String toString() {
-        return "Country{" +
+        return "City{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", country=" + country.toStringWithoutCities() +
                 ", lastUpdate=" + lastUpdate +
-                ", cities=" + cities +
-                '}';
-    }
-
-    public String toStringWithoutCities() {
-        return "Country{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastUpdate=" + lastUpdate +
+                ", capital=" + capital +
                 '}';
     }
 
@@ -58,6 +54,14 @@ public class Country {
         this.name = name;
     }
 
+    public CountryMysql getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryMysql country) {
+        this.country = country;
+    }
+
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
@@ -66,11 +70,11 @@ public class Country {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<City> getCities() {
-        return cities;
+    public boolean isCapital() {
+        return capital;
     }
 
-    public void setCities(List<City> city) {
-        this.cities = city;
+    public void setCapital(Boolean capital) {
+        this.capital = capital;
     }
 }

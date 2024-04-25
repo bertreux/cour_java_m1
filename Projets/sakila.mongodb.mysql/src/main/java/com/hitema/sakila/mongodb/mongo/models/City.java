@@ -1,4 +1,4 @@
-package com.hitema.sakila.mongodb.models;
+package com.hitema.sakila.mongodb.mongo.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;

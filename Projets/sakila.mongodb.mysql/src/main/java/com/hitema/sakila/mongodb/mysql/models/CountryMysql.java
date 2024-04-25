@@ -1,4 +1,4 @@
-package com.hitema.intro.models;
+package com.hitema.sakila.mongodb.mysql.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "country")
-public class Country {
+public class CountryMysql {
     @Id
     @Column(name = "country_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Country {
 
     @OneToMany(mappedBy="country")
     @JsonIgnoreProperties(value = {"country"})
-    private List<City> cities;
+    private List<CityMysql> cities;
 
     @Override
     public String toString() {
@@ -66,11 +66,11 @@ public class Country {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<City> getCities() {
+    public List<CityMysql> getCities() {
         return cities;
     }
 
-    public void setCities(List<City> city) {
+    public void setCities(List<CityMysql> city) {
         this.cities = city;
     }
 }
