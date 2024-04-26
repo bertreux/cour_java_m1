@@ -23,6 +23,8 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		String url = String.format("http://localhost:%d%s/check", port, contextPath);
+		String swagger = String.format("http://localhost:%d%s/swagger-ui/index.html", port, contextPath);
 		log.info("{}",url);
+		log.info("{}",swagger);
 	}
 }
