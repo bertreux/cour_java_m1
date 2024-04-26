@@ -3,6 +3,7 @@ package com.hitema.sakila.mongodb.mongo.services;
 import com.hitema.sakila.mongodb.mongo.models.FilmMongo;
 import com.hitema.sakila.mongodb.mongo.models.LanguageMongo;
 import com.hitema.sakila.mongodb.mongo.models.UserMongo;
+import com.hitema.sakila.mongodb.mysql.models.FilmMysql;
 import com.hitema.sakila.mongodb.mysql.services.FilmMysqlService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +23,9 @@ class FilmMongoServiceTest {
 
     @Autowired
     private FilmMongoService service;
+
+    @Autowired
+    private FilmMysqlService mysqlService;
 
     @Test
     void create() {
@@ -67,5 +72,16 @@ class FilmMongoServiceTest {
 
     @Test
     void migrate() {
+        List<FilmMysql> filmsMiysql = mysqlService.readAll();
+        log.info("DEBUT TEST Migrate");
+        log.info("nb film mysql = {}", filmsMiysql.size());
+        int nbFilmMongo = service.readAll().size();
+        log.info("nb film mongo avant migrate = {}", nbFilmMongo);
+        List<FilmMongo> filmsMongo = service.migrate(filmsMiysql);
+        log.info("nb film mongo après migrate = {}", filmsMongo.size());
+        if(filmsMongo.size() == nbFilmMongo) {
+            log.error("Aucun film n'a été migrer");
+        }
+        log.info("FIN TEST Read Migrate");
     }
 }
