@@ -70,11 +70,6 @@ public class CityMongoServiceImpl implements CityMongoService {
         return repository.findAll();
     }
 
-//    @Override
-//    public List<CountryMongo> readAllCountry() {
-//        return repository.findDistinctCountry();
-//    }
-
     public List<CountryMongo> readAllCountry() {
         List<CityMongo> cities = readAll();
         List<CountryMongo> countries = new ArrayList<>();
