@@ -14,4 +14,5 @@ public interface CityMongoService {
     List<CityMongo> readAll();
     List<CityMongo> migrate(List<CityMysql> cities);
     List<CountryMongo> readAllCountry();
+    List<String> readAllCountry2();
 }

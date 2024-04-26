@@ -4,20 +4,23 @@ import com.hitema.sakila.mongodb.mongo.models.CityMongo;
 import com.hitema.sakila.mongodb.mongo.models.CountryMongo;
 import com.hitema.sakila.mongodb.mongo.repositories.CityMongoRepository;
 import com.hitema.sakila.mongodb.mysql.models.CityMysql;
-import com.hitema.sakila.mongodb.mysql.models.CountryMysql;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
 public class CityMongoServiceImpl implements CityMongoService {
 
+    private final MongoTemplate mongoTemplate;
     private CityMongoRepository repository;
 
-    public CityMongoServiceImpl(CityMongoRepository cityRepository) {
+    public CityMongoServiceImpl(CityMongoRepository cityRepository, MongoTemplate mongoTemplate) {
         this.repository = cityRepository;
+        this.mongoTemplate = mongoTemplate;
     }
 
     @Override
@@ -82,4 +85,12 @@ public class CityMongoServiceImpl implements CityMongoService {
 
         return countries;
     }
+
+    public List<String> readAllCountry2() {
+        return mongoTemplate.query(CityMongo.class)
+                .distinct("country.name")
+                .as(String.class)
+                .all();
+    }
+
 }

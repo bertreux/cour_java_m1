@@ -71,4 +71,11 @@ class CityServiceTest {
         serviceMysql.readAll().forEach(c -> log.info("{}", c));
         log.info("FIN TEST Read All With MySQL");
     }
+
+    @Test
+    void readAllCountryMongo() {
+        log.info("DEBUT TEST Read All Country With Mongo");
+        service.readAllCountry2().forEach(c -> log.info("{}", c));
+        log.info("FIN TEST Read All Country With Mongo");
+    }
 }

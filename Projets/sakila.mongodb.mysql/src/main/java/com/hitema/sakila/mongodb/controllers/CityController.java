@@ -5,6 +5,7 @@ import com.hitema.sakila.mongodb.mongo.models.CountryMongo;
 import com.hitema.sakila.mongodb.mongo.services.CityMongoService;
 import com.hitema.sakila.mongodb.mysql.models.CityMysql;
 import com.hitema.sakila.mongodb.mysql.services.CityMysqlService;
+import com.mongodb.client.DistinctIterable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,11 @@ public class CityController {
     @GetMapping("/countries")
     public List<CountryMongo> getAllCountriesMongo() {
         return serviceMongo.readAllCountry();
+    }
+
+    @GetMapping("/countries2")
+    public List<String> getAllCountriesMongo2() {
+        return serviceMongo.readAllCountry2();
     }
 
     @GetMapping("/mongo/all")
