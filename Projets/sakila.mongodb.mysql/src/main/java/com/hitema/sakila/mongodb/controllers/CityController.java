@@ -1,6 +1,7 @@
 package com.hitema.sakila.mongodb.controllers;
 
 import com.hitema.sakila.mongodb.mongo.models.CityMongo;
+import com.hitema.sakila.mongodb.mongo.models.CountryMongo;
 import com.hitema.sakila.mongodb.mongo.services.CityMongoService;
 import com.hitema.sakila.mongodb.mysql.models.CityMysql;
 import com.hitema.sakila.mongodb.mysql.services.CityMysqlService;
@@ -29,6 +30,11 @@ public class CityController {
     @GetMapping("/mysql/all")
     public List<CityMysql> getAllMysql() {
         return serviceMysql.readAll();
+    }
+
+    @GetMapping("/countries")
+    public List<CountryMongo> getAllCountriesMongo() {
+        return serviceMongo.readAllCountry();
     }
 
     @GetMapping("/mongo/all")

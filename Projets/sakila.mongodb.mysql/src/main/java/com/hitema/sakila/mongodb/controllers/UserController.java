@@ -40,7 +40,7 @@ public class UserController {
         return service.create(user);
     }
 
-    @PostMapping("/picture/{id}")
+    @PostMapping(value = "/picture/{id}", consumes = { MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE})
     public UserMongo insertPicture(@RequestBody byte[] file, @PathVariable String id) {
         return service.setPictureById(id, file);
     }

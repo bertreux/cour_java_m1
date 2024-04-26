@@ -8,6 +8,7 @@ import com.hitema.sakila.mongodb.mysql.models.CountryMysql;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,5 +68,23 @@ public class CityMongoServiceImpl implements CityMongoService {
             }
         });
         return repository.findAll();
+    }
+
+//    @Override
+//    public List<CountryMongo> readAllCountry() {
+//        return repository.findDistinctCountry();
+//    }
+
+    public List<CountryMongo> readAllCountry() {
+        List<CityMongo> cities = readAll();
+        List<CountryMongo> countries = new ArrayList<>();
+
+        for (CityMongo city : cities) {
+            if (city.getCountry() != null) {
+                countries.add(city.getCountry());
+            }
+        }
+
+        return countries;
     }
 }
